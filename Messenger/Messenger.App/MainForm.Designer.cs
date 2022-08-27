@@ -38,8 +38,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.failedLabel = new System.Windows.Forms.Label();
+            this.loadingPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadingPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // loginTextBox
@@ -140,12 +142,23 @@
             this.failedLabel.TabIndex = 9;
             this.failedLabel.Text = "Failed!";
             // 
+            // loadingPictureBox
+            // 
+            this.loadingPictureBox.Location = new System.Drawing.Point(362, 394);
+            this.loadingPictureBox.MaximumSize = new System.Drawing.Size(65, 65);
+            this.loadingPictureBox.MinimumSize = new System.Drawing.Size(65, 65);
+            this.loadingPictureBox.Name = "loadingPictureBox";
+            this.loadingPictureBox.Size = new System.Drawing.Size(65, 65);
+            this.loadingPictureBox.TabIndex = 10;
+            this.loadingPictureBox.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
             this.ClientSize = new System.Drawing.Size(797, 471);
+            this.Controls.Add(this.loadingPictureBox);
             this.Controls.Add(this.failedLabel);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -163,6 +176,7 @@
             this.Text = "Login";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadingPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +194,6 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private Label failedLabel;
+        private PictureBox loadingPictureBox;
     }
 }

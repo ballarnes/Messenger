@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hospital.PresentationLogic.Models.Responses
+namespace Messenger.PresentationLogic.Models.Responses
 {
     public class PaginatedItemsResponse<T>
     {

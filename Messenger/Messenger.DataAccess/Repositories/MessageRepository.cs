@@ -2,12 +2,11 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Hospital.DataAccess.Repositories.Interfaces;
+using Messenger.DataAccess.Repositories.Interfaces;
 using Dapper;
 using Messenger.DataAccess.Models.Entities;
 using Messenger.DataAccess.Connection.Interfaces;
 using System.Collections.Generic;
-using Messenger.DataAccess.Repositories.Interfaces;
 
 namespace Messenger.DataAccess.Repositories
 {

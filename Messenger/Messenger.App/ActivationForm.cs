@@ -1,29 +1,21 @@
 ﻿using Messenger.App.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Messenger.App.Services.Interfaces;
 
 namespace Messenger.App
 {
     public partial class ActivationForm : Form
     {
-        private readonly string _host = "http://netmessenger.somee.com";
+        private readonly IHttpService _httpService;
 
-        public ActivationForm()
+        public ActivationForm(IHttpService httpService)
         {
             InitializeComponent();
             textBox1.MaxLength = 4;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            _httpService = httpService;
         }
 
-        public static User User { get; set; }
+        public static User User { get; set; } = null!;
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -42,21 +34,11 @@ namespace Messenger.App
             }
             else
             {
-                try
+                var result = await _httpService.ActivateAccout(User.Username, textBox1.Text);
+
+                if (result != null)
                 {
-                    var httpClient = new HttpClient();
-
-                    var request = new User()
-                    {
-                        Username = User.Username,
-                        EmailCode = Convert.ToInt32(textBox1.Text)
-                    };
-
-                    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{_host}/api/v1/User/ActivateAccount", content);
-
-                    if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     {
                         pictureBox1.Image = Image.FromFile(@"Images\error_icon.png");
                         this.Close();
@@ -73,12 +55,6 @@ namespace Messenger.App
                         pictureBox1.Image = Image.FromFile(@"Images\success_icon.png");
                         this.Close();
                     }
-
-                    var responseString = await response.Content.ReadAsStringAsync();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message + ex);
                 }
             }
         }

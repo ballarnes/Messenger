@@ -1,4 +1,4 @@
-﻿using Hospital.BusinessLogic.Models.Responses;
+﻿using Messenger.BusinessLogic.Models.Responses;
 using Messenger.DataAccess.Models.Dtos;
 using System;
 using System.Collections.Generic;

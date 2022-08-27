@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Hospital.DataAccess.Data;
+using Messenger.DataAccess.Data;
 using Messenger.DataAccess.Models.Entities;
 
-namespace Hospital.DataAccess.Repositories.Interfaces
+namespace Messenger.DataAccess.Repositories.Interfaces
 {
     public interface IUserRepository
     {
@@ -12,6 +12,7 @@ namespace Hospital.DataAccess.Repositories.Interfaces
         Task<int?> ActivateAccount(User user);
         Task<User> Login(string username, string password);
         Task<int?> RegisterUser(string name, string surname, string email, string username, string password, bool isActivated, int emailCode);
+        Task<int?> UpdateUserInfo(int id, string name, string surname, string email, string username);
         Task<int?> DeleteUser(int id);
     }
 }

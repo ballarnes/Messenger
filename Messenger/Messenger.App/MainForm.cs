@@ -3,6 +3,8 @@ using System.Text;
 using System.Text.Json;
 using Flurl.Http;
 using Messenger.App.Models;
+using Messenger.App.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Messenger.App
 {
@@ -10,14 +12,18 @@ namespace Messenger.App
     {
         private bool _usernameIsValid;
         private bool _passwordIsValid;
-        private readonly string _host = "http://netmessenger.somee.com";
+        private readonly IHttpService _httpService;
 
-        public MainForm()
+        public MainForm(IHttpService httpService)
         {
             InitializeComponent();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             failedLabel.Visible = false;
+            loadingPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            loadingPictureBox.Image = Image.FromFile(@"Images\loading_gif.gif");
+            loadingPictureBox.Visible = false;
+            _httpService = httpService;
         }
 
         private void label4_Enter(object sender, EventArgs e)
@@ -28,12 +34,14 @@ namespace Messenger.App
 
         private void label4_Click(object sender, EventArgs e)
         {
-            var registrationForm = new RegistrationForm();
+            var registrationForm = Program.ServiceProvider.GetRequiredService<RegistrationForm>();
             registrationForm.Show();
         }
 
         private async void loginButton_Click(object sender, EventArgs e)
         {
+            loadingPictureBox.Visible = true;
+
             if (String.IsNullOrEmpty(loginTextBox.Text))
             {
                 _usernameIsValid = false;
@@ -56,35 +64,33 @@ namespace Messenger.App
 
             if (_usernameIsValid && _passwordIsValid)
             {
-                try
-                {
-                    failedLabel.Visible = false;
-                    var response = await $"{_host}/api/v1/User/Login"
-                        .PostJsonAsync(new { Username = loginTextBox.Text, Password = EncodingService.GetHashString(passwordTextBox.Text) })
-                        .ReceiveJson<User>();
+                failedLabel.Visible = false;
 
-                    if (!response.isActivated)
+                var result = await _httpService.Login(loginTextBox.Text, passwordTextBox.Text);
+
+                if (result != null)
+                {
+                    if (!result.isActivated)
                     {
-                        var activationForm = new ActivationForm();
-                        ActivationForm.User = response;
+                        var activationForm = Program.ServiceProvider.GetRequiredService<ActivationForm>();
+                        ActivationForm.User = result;
                         activationForm.Show();
                     }
                     else
                     {
-                        var messengerForm = new MessengerForm();
-
-                        MessengerForm.User = response;
-
+                        var messengerForm = Program.ServiceProvider.GetRequiredService<MessengerForm>();
+                        MessengerForm.User = result;
                         messengerForm.Show();
                         this.Hide();
                     }
                 }
-                catch (Exception ex)
+                else
                 {
                     failedLabel.Visible = true;
-                    Console.WriteLine(ex.Message + ex);
                 }
             }
+
+            loadingPictureBox.Visible = false;
         }
     }
 }

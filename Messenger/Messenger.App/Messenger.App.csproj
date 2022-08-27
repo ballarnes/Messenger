@@ -11,6 +11,7 @@
   <ItemGroup>
     <None Remove="Images\error_icon.png" />
     <None Remove="Images\success_icon.png" />
+    <None Remove="Images\user_photo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -20,11 +21,15 @@
     <Content Include="Images\success_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\user_photo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.6" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

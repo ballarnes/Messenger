@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Hospital.DatabaseInitialization {
+namespace Messenger.DatabaseInitialization {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Hospital.DatabaseInitialization {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Hospital.DatabaseInitialization.Commands", typeof(Commands).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Messenger.DatabaseInitialization.Commands", typeof(Commands).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,7 +62,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[Offices]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[Offices]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE Offices(
@@ -80,7 +80,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[OfficesChangeLog]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[OfficesChangeLog]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE OfficesChangeLog(
@@ -102,7 +102,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[Specializations]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[Specializations]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE Specializations(
@@ -121,7 +121,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[SpecializationsChangeLog]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[SpecializationsChangeLog]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE SpecializationsChangeLog(
@@ -144,7 +144,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[Doctors]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[Doctors]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE Doctors(
@@ -164,7 +164,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[DoctorsChangeLog]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[DoctorsChangeLog]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE DoctorsChangeLog(
@@ -188,7 +188,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[Appointments]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[Appointments]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE Appointments(
@@ -210,7 +210,7 @@ namespace Hospital.DatabaseInitialization {
         
         /// <summary>
         ///   Looks up a localized string similar to IF NOT EXISTS (SELECT * FROM sys.objects 
-        ///WHERE object_id = OBJECT_ID(N&apos;[Hospital].[AppointmentsChangeLog]&apos;) AND type in (N&apos;U&apos;))
+        ///WHERE object_id = OBJECT_ID(N&apos;[Messenger].[AppointmentsChangeLog]&apos;) AND type in (N&apos;U&apos;))
         ///
         ///BEGIN
         ///CREATE TABLE AppointmentsChangeLog(

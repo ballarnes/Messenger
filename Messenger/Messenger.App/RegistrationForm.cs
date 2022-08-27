@@ -1,6 +1,7 @@
 ﻿using Messenger.App.Models;
 using Messenger.App.Models.Requests;
 using Messenger.App.Services;
+using Messenger.App.Services.Interfaces;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -14,9 +15,9 @@ namespace Messenger.App
         private bool _emailIsValid;
         private bool _usernameIsValid;
         private bool _passwordIsValid;
-        private readonly string _host = "http://netmessenger.somee.com";
+        private readonly IHttpService _httpService;
 
-        public RegistrationForm()
+        public RegistrationForm(IHttpService httpService)
         {
             InitializeComponent();
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -29,10 +30,16 @@ namespace Messenger.App
             textBox6.Visible = false;
             label6.Visible = false;
             button2.Visible = false;
+            loadingPictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            loadingPictureBox.Image = Image.FromFile(@"Images\loading_gif.gif");
+            loadingPictureBox.Visible = false;
+            _httpService = httpService;
         }
 
         private async void button1_Click(object sender, EventArgs e)
         {
+            loadingPictureBox.Visible = true;
+
             if (String.IsNullOrEmpty(textBox1.Text))
             {
                 pictureBox4.Image = Image.FromFile(@"Images\error_icon.png");
@@ -94,26 +101,11 @@ namespace Messenger.App
 
             if (_nameIsValid && _surnameIsValid && _emailIsValid && _usernameIsValid && _passwordIsValid)
             {
-                try
+                var result = await _httpService.RegisterUser(textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, textBox5.Text);
+                
+                if (result != null)
                 {
-                    var httpClient = new HttpClient();
-
-                    var request = new RegisterUserRequest()
-                    {
-                        Name = textBox1.Text,
-                        Surname = textBox2.Text,
-                        Email = textBox3.Text,
-                        Username = textBox4.Text,
-                        Password = EncodingService.GetHashString(textBox5.Text)
-                    };
-
-                    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{_host}/api/v1/User/RegisterUser", content);
-
-                    var responseString = await response.Content.ReadAsStringAsync();
-
-                    if (response.IsSuccessStatusCode)
+                    if (result.IsSuccessStatusCode)
                     {
                         textBox1.Enabled = false;
                         textBox2.Enabled = false;
@@ -131,11 +123,9 @@ namespace Messenger.App
                         button2.Visible = true;
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message + ex);
-                }
             }
+
+            loadingPictureBox.Visible = false;
         }
 
         private async void textBox4_TextChanged(object sender, EventArgs e)
@@ -143,22 +133,13 @@ namespace Messenger.App
             await CheckUsername(textBox4.Text);
         }
 
-        public async Task CheckUsername(string username)
+        private async Task CheckUsername(string username)
         {
-            try
+            var result = await _httpService.CheckUsername(username);
+
+            if (result != null)
             {
-                var httpClient = new HttpClient();
-
-                var request = new UsernameRequest()
-                {
-                    Username = username
-                };
-
-                var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync($"{_host}/api/v1/User/CheckUsername", content);
-
-                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                if (result.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
                     _usernameIsValid = true;
                     pictureBox1.Image = Image.FromFile(@"Images\success_icon.png");
@@ -167,18 +148,7 @@ namespace Messenger.App
                 {
                     pictureBox1.Image = Image.FromFile(@"Images\error_icon.png");
                 }
-
-                var responseString = await response.Content.ReadAsStringAsync();
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message + ex);
-            }
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
@@ -198,21 +168,11 @@ namespace Messenger.App
             }
             else
             {
-                try
+                var result = await _httpService.ActivateAccout(textBox4.Text, textBox6.Text);
+
+                if (result != null)
                 {
-                    var httpClient = new HttpClient();
-
-                    var request = new User()
-                    {
-                        Username = textBox4.Text,
-                        EmailCode = Convert.ToInt32(textBox6.Text)
-                    };
-
-                    var content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-
-                    var response = await httpClient.PostAsync($"{_host}/api/v1/User/ActivateAccount", content);
-
-                    if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+                    if (result.StatusCode == System.Net.HttpStatusCode.BadRequest)
                     {
                         pictureBox6.Image = Image.FromFile(@"Images\error_icon.png");
                         this.Close();
@@ -229,12 +189,6 @@ namespace Messenger.App
                         pictureBox6.Image = Image.FromFile(@"Images\success_icon.png");
                         this.Close();
                     }
-
-                    var responseString = await response.Content.ReadAsStringAsync();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message + ex);
                 }
             }
         }

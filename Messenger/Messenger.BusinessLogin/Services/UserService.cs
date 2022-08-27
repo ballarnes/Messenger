@@ -5,8 +5,8 @@ using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using AutoMapper;
-using Hospital.BusinessLogic.Models.Responses;
-using Hospital.DataAccess.Repositories.Interfaces;
+using Messenger.BusinessLogic.Models.Responses;
+using Messenger.DataAccess.Repositories.Interfaces;
 using Messenger.BusinessLogic.Services.Interfaces;
 using Messenger.DataAccess.Models.Dtos;
 using Messenger.DataAccess.Models.Entities;
@@ -153,20 +153,25 @@ namespace Messenger.BusinessLogic.Services
             }
         }
 
-        /*public async Task<int?> UpdateDoctor(DoctorDto doctorDto)
+        public async Task<int?> UpdateUserInfo(int id, string name, string surname, string email, string username)
         {
-            return await ExecuteSafe(async () =>
+            try
             {
-                var result = await _doctorRepository.UpdateDoctor(_mapper.Map<Doctor>(doctorDto));
+                var result = await _userRepository.UpdateUserInfo(id, name, surname, email, username);
 
-                if (result == default)
+                if (result == null)
                 {
                     return null;
                 }
 
                 return result;
-            });
-        }*/
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message + ex);
+                return null;
+            }
+        }
 
         public async Task<int?> DeleteUser(int id)
         {

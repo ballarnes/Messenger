@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Hospital.DataAccess.Data
+namespace Messenger.DataAccess.Data
 {
     public class PaginatedItems<T>
     {

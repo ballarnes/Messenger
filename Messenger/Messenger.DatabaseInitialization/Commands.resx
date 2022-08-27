@@ -161,15 +161,15 @@ CREATE PROCEDURE AddOrUpdateUsers
 	@surname nvarchar(max),
 	@email nvarchar(max),
 	@username nvarchar(max),
-	@password nvarchar(max),
-	@isActivated bit,
-	@emailCode int,
+	@password nvarchar(max) = null,
+	@isActivated bit = true,
+	@emailCode int = 0,
 	@id int = 0
 AS
 IF @id = 0
 	BEGIN
-		INSERT INTO [Users]([Name], [Surname], [Email], [Username], [Password], [isActivated], [EmailCode]) 
-		VALUES(@name, @surname, @email, @username, @password, @isActivated, @emailCode)
+		INSERT INTO [Users]([Name], [Surname], [Email], [Username], [isActivated], [EmailCode]) 
+		VALUES(@name, @surname, @email, @username, @isActivated, @emailCode)
 
 		SET @id = scope_identity()
 		RETURN @id
@@ -182,7 +182,6 @@ ELSE
 		[Surname] = @surname,
 		[Email] = @email,
 		[Username] = @username,
-		[Password] = @password,
 		[isActivated] = @isActivated,
 		[EmailCode] = @emailCode
 		WHERE [Id] = @id

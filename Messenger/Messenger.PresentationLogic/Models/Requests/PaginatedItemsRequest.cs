@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Hospital.PresentationLogic.Models.Requests
+namespace Messenger.PresentationLogic.Models.Requests
 {
     public class PaginatedItemsRequest
     {

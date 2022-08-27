@@ -6,8 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Hospital.DataAccess.Repositories;
-using Hospital.DataAccess.Repositories.Interfaces;
 using Messenger.DataAccess.Repositories;
 using Messenger.BusinessLogic.Services.Interfaces;
 using Messenger.BusinessLogic.Services;
@@ -15,8 +13,10 @@ using Messenger.DataAccess.Connection.Interfaces;
 using Messenger.DataAccess.Connection;
 using Messenger.PresentationLogic.Hubs;
 using Messenger.DataAccess.Repositories.Interfaces;
+using Messenger.DataAccess.Infrastructure.Interfaces;
+using Messenger.DataAccess.Infrastructure;
 
-namespace Hospital.PresentationLogic
+namespace Messenger.PresentationLogic
 {
     public class Startup
     {
@@ -51,6 +51,8 @@ namespace Hospital.PresentationLogic
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IMessageRepository, MessageRepository>();
             services.AddTransient<IMessageService, MessageService>();
+
+            services.AddSingleton<IStoredProcedureManager, StoredProcedureManager>();
 
             services.AddScoped<IDbConnectionWrapper, DbConnectionWrapper>(provider => new DbConnectionWrapper(Configuration["ConnectionString"]));
 

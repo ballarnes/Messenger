@@ -1,4 +1,4 @@
-namespace Hospital.PresentationLogic
+namespace Messenger.PresentationLogic
 {
     public class Program
     {

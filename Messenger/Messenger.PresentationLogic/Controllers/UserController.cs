@@ -104,6 +104,21 @@ namespace Messenger.PresentationLogic.Controllers
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> UpdateUserInfo(UpdateUserInfoRequest request)
+        {
+            var result = await _userService.UpdateUserInfo(request.Id, request.Name, request.Surname, request.Email, request.Username);
+
+            if (result == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> DeleteUser(GetByIdRequest request)
         {
             var result = await _userService.DeleteUser(request.Id);

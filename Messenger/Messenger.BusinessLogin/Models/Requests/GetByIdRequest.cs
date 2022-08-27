@@ -1,4 +1,4 @@
-﻿namespace Hospital.BusinessLogic.Models.Requests
+﻿namespace Messenger.BusinessLogic.Models.Requests
 {
     public class GetByIdRequest
     {

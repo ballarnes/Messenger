@@ -1,4 +1,4 @@
-﻿namespace Hospital.BusinessLogic.Models.Responses
+﻿namespace Messenger.BusinessLogic.Models.Responses
 {
     public class IdResponse<T>
     {

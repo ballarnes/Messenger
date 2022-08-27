@@ -48,12 +48,14 @@
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.loadingPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadingPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -239,12 +241,23 @@
             this.pictureBox6.TabIndex = 19;
             this.pictureBox6.TabStop = false;
             // 
+            // loadingPictureBox
+            // 
+            this.loadingPictureBox.Location = new System.Drawing.Point(114, 259);
+            this.loadingPictureBox.MaximumSize = new System.Drawing.Size(95, 95);
+            this.loadingPictureBox.MinimumSize = new System.Drawing.Size(95, 95);
+            this.loadingPictureBox.Name = "loadingPictureBox";
+            this.loadingPictureBox.Size = new System.Drawing.Size(95, 95);
+            this.loadingPictureBox.TabIndex = 20;
+            this.loadingPictureBox.TabStop = false;
+            // 
             // RegistrationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Honeydew;
             this.ClientSize = new System.Drawing.Size(330, 381);
+            this.Controls.Add(this.loadingPictureBox);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.textBox6);
@@ -276,6 +289,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.loadingPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,5 +317,6 @@
         private TextBox textBox6;
         private Button button2;
         private PictureBox pictureBox6;
+        private PictureBox loadingPictureBox;
     }
 }

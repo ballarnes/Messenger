@@ -2,7 +2,7 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Hospital.DataAccess.Repositories.Interfaces;
+using Messenger.DataAccess.Repositories.Interfaces;
 using Dapper;
 using Messenger.DataAccess.Models.Entities;
 using Messenger.DataAccess.Connection.Interfaces;
@@ -122,6 +122,25 @@ namespace Messenger.DataAccess.Repositories
             await _connection.Connection.ExecuteAsync("AddOrUpdateUsers", parameters, commandType: CommandType.StoredProcedure);
 
             var result = parameters.Get<int>("@id");
+
+            if (result == default)
+            {
+                return null;
+            }
+
+            return result;
+        }
+
+        public async Task<int?> UpdateUserInfo(int id, string name, string surname, string email, string username)
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@id", id, DbType.Int32);
+            parameters.Add("@name", name, DbType.String);
+            parameters.Add("@surname", surname, DbType.String);
+            parameters.Add("@email", surname, DbType.String);
+            parameters.Add("@username", username, DbType.String);
+
+            var result = await _connection.Connection.ExecuteAsync("AddOrUpdateUsers", parameters, commandType: CommandType.StoredProcedure);
 
             if (result == default)
             {
